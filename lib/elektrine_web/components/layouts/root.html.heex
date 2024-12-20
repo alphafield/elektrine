@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable]">
+<html lang="en" class="[scrollbar-gutter:stable] h-full">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <.live_title suffix=" · Phoenix Framework">
       <%= assigns[:page_title] || "Elektrine" %>
     </.live_title>
@@ -12,6 +15,39 @@
     </script>
   </head>
   <body class="bg-white">
-    <%= @inner_content %>
+    <header class="px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
+        <div class="flex items-center gap-4">
+          <a href="/" class="text-lg font-semibold">Elektrine</a>
+        </div>
+        <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
+          <%= if @current_user do %>
+            <a href={~p"/settings"} class="hover:text-zinc-700">
+              Settings
+            </a>
+            <form action={~p"/logout"} method="post" class="inline" onsubmit="event.preventDefault(); this.querySelector('input[name=_method]').value='delete'; this.submit();">
+              <input type="hidden" name="_csrf_token" value={get_csrf_token()}>
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="hover:text-zinc-700">
+                Logout
+              </button>
+            </form>
+          <% else %>
+            <a href={~p"/login"} class="hover:text-zinc-700">
+              Login
+            </a>
+            <a href={~p"/register"} class="hover:text-zinc-700">
+              Register
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </header>
+    <main class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl">
+        <.flash_group flash={@flash} />
+        <%= @inner_content %>
+      </div>
+    </main>
   </body>
 </html>

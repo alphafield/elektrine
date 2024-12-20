@@ -1,9 +1,4 @@
 defmodule ElektrineWeb.ErrorHTML do
-  @moduledoc """
-  This module is invoked by your endpoint in case of errors on HTML requests.
-
-  See config/config.exs.
-  """
   use ElektrineWeb, :html
 
   # If you want to customize your error pages,
@@ -13,7 +8,7 @@ defmodule ElektrineWeb.ErrorHTML do
   #   * lib/elektrine_web/controllers/error_html/404.html.heex
   #   * lib/elektrine_web/controllers/error_html/500.html.heex
   #
-  # embed_templates "error_html/*"
+  embed_templates "error_html/*"
 
   # The default is to render a plain text page based on
   # the template name. For example, "404.html" becomes

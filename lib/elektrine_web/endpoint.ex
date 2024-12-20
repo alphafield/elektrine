@@ -8,7 +8,9 @@ defmodule ElektrineWeb.Endpoint do
     store: :cookie,
     key: "_elektrine_key",
     signing_salt: "XvVOUw1H",
-    same_site: "Lax"
+    same_site: "Lax",
+    secure: true,
+    extra: "SameSite=Strict"
   ]
 
   socket "/live", Phoenix.LiveView.Socket,
@@ -24,6 +26,12 @@ defmodule ElektrineWeb.Endpoint do
     from: :elektrine,
     gzip: false,
     only: ElektrineWeb.static_paths()
+
+  # Add this new plug for uploads
+  plug Plug.Static,
+    at: "/uploads",
+    from: "priv/static/uploads",
+    gzip: false
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -49,5 +57,6 @@ defmodule ElektrineWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug ElektrineWeb.Plugs.SecurityHeaders
   plug ElektrineWeb.Router
 end

@@ -1,0 +1,68 @@
+<div class="flex min-h-full flex-col justify-center">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+      Create your account
+    </h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <.form :let={f} for={@changeset} action={~p"/register"} class="space-y-6">
+        <div>
+          <label for={f[:username].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+            Username
+          </label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <.input field={f[:username]} type="text" required class="w-full pr-32" />
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <span class="text-gray-500 sm:text-sm">@elektrine.com</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for={f[:first_name].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+            First Name
+          </label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <.input field={f[:first_name]} type="text" required class="w-full" />
+          </div>
+        </div>
+
+        <div>
+          <label for={f[:last_name].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+            Last Name
+          </label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <.input field={f[:last_name]} type="text" required class="w-full" />
+          </div>
+        </div>
+
+        <div>
+          <label for={f[:recovery_email].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+            Recovery Email
+          </label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <.input field={f[:recovery_email]} type="email" required class="w-full" />
+          </div>
+          <p class="mt-1 text-sm text-gray-500">
+            Used for password recovery and important notifications
+          </p>
+        </div>
+
+        <div>
+          <label for={f[:password].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+            Password
+          </label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <.input field={f[:password]} type="password" required class="w-full" />
+          </div>
+        </div>
+
+        <div>
+          <.button type="submit" class="w-full">Create Account</.button>
+        </div>
+      </.form>
+    </div>
+  </div>
+</div> 

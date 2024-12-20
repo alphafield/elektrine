@@ -1,0 +1,61 @@
+<div class="flex min-h-full flex-col justify-center">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+      Sign in to your account
+    </h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <.form :let={f} for={@changeset} action={~p"/login"} as={:user} class="space-y-6">
+        <div>
+          <label for={f[:username].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+            Username
+          </label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <.input field={f[:username]} type="text" required class="w-full" />
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <label for={f[:password].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+              Password
+            </label>
+            <div class="text-sm">
+              <a href={~p"/reset-password"} class="font-semibold text-indigo-600 hover:text-indigo-500">
+                Forgot password?
+              </a>
+            </div>
+          </div>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <.input field={f[:password]} type="password" required class="w-full" />
+          </div>
+        </div>
+
+        <div>
+          <.button type="submit" class="w-full">Sign in</.button>
+        </div>
+      </.form>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">
+              Don't have an account?
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href={~p"/register"} class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            Create an account
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

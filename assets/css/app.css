@@ -1,5 +1,76 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "cropperjs/dist/cropper.css";
 
 /* This file is for your main application CSS */
+
+/* Add these custom styles */
+.cropper-container {
+  width: 100% !important;
+  max-height: calc(60vh - 100px) !important;
+}
+
+.cropper-wrap-box {
+  background-color: #f3f4f6;
+}
+
+/* Ensure modal content doesn't overflow */
+.cropper-modal {
+  max-height: 100%;
+}
+
+/* GitHub-style cropper customization */
+.cropper-view-box,
+.cropper-face {
+  border-radius: 50%;
+}
+
+.cropper-view-box {
+  outline: 0;
+  box-shadow: 0 0 0 1px #39f;
+}
+
+.cropper-face {
+  background-color: transparent !important;
+}
+
+.cropper-dashed,
+.cropper-point.point-se,
+.cropper-point.point-sw,
+.cropper-point.point-nw,
+.cropper-point.point-ne {
+  display: none !important;
+}
+
+.cropper-line {
+  background: none !important;
+}
+
+.cropper-view-box {
+  outline: 0;
+}
+
+.cropper-modal {
+  background-color: #f3f4f6;
+  opacity: 0.8;
+}
+
+/* Make the preview circular */
+#preview-image {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Preview styles */
+.preview-container {
+  display: block;
+  overflow: hidden;
+  width: 180px;
+  height: 180px;
+}
+
+.preview-container img {
+  max-width: 100%;
+  transform-origin: top left;
+}

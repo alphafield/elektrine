@@ -1,0 +1,202 @@
+<div class="flex flex-col">
+  <div class="mx-auto w-full max-w-4xl">
+    <h2 class="text-2xl font-bold leading-7 text-gray-900">
+      Account Settings
+    </h2>
+
+    <div class="mt-6">
+      <div class="space-y-10 divide-y divide-gray-900/10">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+          <div class="px-4 sm:px-0">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Username</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">
+              Change your @elektrine.com username.
+            </p>
+          </div>
+
+          <div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl md:col-span-2">
+            <div class="px-4 py-6 sm:p-8">
+              <.form :let={f} for={@username_changeset} action={~p"/settings/update_username"} method="put" class="space-y-6">
+                <div>
+                  <label for={f[:username].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+                    Username
+                  </label>
+                  <div class="mt-1">
+                    <.input field={f[:username]} type="text" required class="w-full" />
+                  </div>
+                </div>
+
+                <div>
+                  <.button type="submit">Change Username</.button>
+                </div>
+              </.form>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
+          <div class="px-4 sm:px-0">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Recovery Email</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">
+              Add a recovery email for password resets and important notifications.
+            </p>
+          </div>
+
+          <div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl md:col-span-2">
+            <div class="px-4 py-6 sm:p-8">
+              <.form :let={f} for={@recovery_email_changeset} action={~p"/settings/update_recovery_email"} method="put" class="space-y-6">
+                <div>
+                  <label for={f[:recovery_email].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+                    Recovery Email
+                  </label>
+                  <div class="mt-1">
+                    <.input field={f[:recovery_email]} type="email" required class="w-full" />
+                  </div>
+                </div>
+
+                <div>
+                  <.button type="submit">Update Recovery Email</.button>
+                </div>
+              </.form>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
+          <div class="px-4 sm:px-0">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Password</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">
+              Update your password.
+            </p>
+          </div>
+
+          <div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl md:col-span-2">
+            <div class="px-4 py-6 sm:p-8">
+              <.form :let={f} for={@password_changeset} action={~p"/settings/update_password"} method="put" class="space-y-6">
+                <div>
+                  <label for={f[:password_current_password].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+                    Current Password
+                  </label>
+                  <div class="mt-1">
+                    <.input field={f[:password_current_password]} type="password" required class="w-full" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for={f[:password].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+                    New Password
+                  </label>
+                  <div class="mt-1">
+                    <.input field={f[:password]} type="password" required class="w-full" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for={f[:password_confirmation].id} class="block text-sm font-semibold leading-6 text-zinc-800">
+                    Confirm New Password
+                  </label>
+                  <div class="mt-1">
+                    <.input field={f[:password_confirmation]} type="password" required class="w-full" />
+                  </div>
+                </div>
+
+                <div>
+                  <.button type="submit">Change Password</.button>
+                </div>
+              </.form>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
+          <div class="px-4 sm:px-0">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Avatar</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">
+              Upload a profile picture.
+            </p>
+          </div>
+
+          <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <div class="px-4 py-6 sm:p-8">
+              <div class="flex items-center space-x-8">
+                <div class="flex-shrink-0">
+                  <img 
+                    src={@current_user.avatar || "/images/default-avatar.png"} 
+                    alt="Profile picture" 
+                    class="h-24 w-24 rounded-full object-cover"
+                    id="avatar-preview"
+                  />
+                </div>
+
+                <.form :let={f} for={@avatar_changeset} action={~p"/settings/update_avatar"} multipart={true}>
+                  <div class="flex flex-col space-y-2">
+                    <div class="flex items-center space-x-4">
+                      <.input field={f[:avatar]} type="file" accept="image/*" required />
+                      <.button type="submit">Upload</.button>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                      Maximum file size: 5MB
+                    </p>
+                  </div>
+                </.form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Crop Modal -->
+<div id="crop-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+  <div class="flex min-h-screen items-end justify-center p-4 text-center sm:items-center sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+    <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
+      <!-- Header -->
+      <div class="border-b border-gray-200 bg-white px-4 py-3 sm:px-6">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">
+          Edit Photo
+        </h3>
+      </div>
+
+      <div class="p-6">
+        <div class="flex gap-8">
+          <!-- Main cropper area -->
+          <div class="flex-1">
+            <div class="aspect-square w-full bg-gray-50 rounded-lg overflow-hidden">
+              <img id="crop-image" src="" alt="Crop preview" class="max-w-full" />
+            </div>
+          </div>
+
+          <!-- Preview column -->
+          <div class="w-[180px] flex flex-col">
+            <p class="mb-4 text-sm font-medium text-gray-900">Preview</p>
+            <div class="preview-container aspect-square w-[180px] rounded-full overflow-hidden bg-gray-50">
+              <img id="preview-image" src="" alt="Preview" class="w-full h-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+        <button
+          type="button"
+          id="crop-button"
+          class="inline-flex w-full justify-center rounded-md bg-[#1b1f24] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#333a44] sm:ml-3 sm:w-auto"
+        >
+          Set new profile photo
+        </button>
+        <button
+          type="button"
+          id="cancel-crop"
+          class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-[#1b1f24] shadow-sm ring-1 ring-inset ring-[#d0d7de] hover:bg-[#f6f8fa] sm:mt-0 sm:w-auto"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,26 @@
+<div class="flex min-h-full flex-col justify-center">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">
+      Set new password
+    </h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <.form :let={f} for={@changeset} action={~p"/reset-password/#{@token}"} class="space-y-6">
+        <div>
+          <label for="password" class="block text-sm font-semibold leading-6 text-zinc-800">
+            New Password
+          </label>
+          <div class="mt-1">
+            <.input field={f[:password]} type="password" required class="w-full" />
+          </div>
+        </div>
+
+        <div>
+          <.button type="submit" class="w-full">Reset Password</.button>
+        </div>
+      </.form>
+    </div>
+  </div>
+</div> 

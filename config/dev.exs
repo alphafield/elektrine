@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :elektrine, Elektrine.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "arblarg",
+  password: "arblarg",
   hostname: "localhost",
   database: "elektrine_dev",
   stacktrace: true,

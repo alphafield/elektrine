@@ -91,5 +91,22 @@ defmodule ElektrineWeb.Router do
     put "/settings/update_password", UserSettingsController, :update_password
     put "/settings/update_recovery_email", UserSettingsController, :update_recovery_email
     put "/settings/update_avatar", UserSettingsController, :update_avatar
+    resources "/products", ProductController
+    resources "/cart", CartController, singleton: true, only: [:show, :create, :delete]
+    resources "/orders", OrderController, only: [:index, :show, :create]
+    resources "/stores", StoreController
+    get "/s/:slug", StoreController, :show
+    get "/cart", CartController, :show
+    post "/cart/items", CartController, :add_item
+    put "/cart/items/:id", CartController, :update_item
+    delete "/cart/items/:id", CartController, :delete_item
+    post "/cart/checkout", CartController, :checkout
+  end
+
+  # Public store routes
+  scope "/", ElektrineWeb do
+    pipe_through [:browser]
+
+    get "/s/:slug", StoreController, :show
   end
 end

@@ -19,6 +19,32 @@
       <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
         <div class="flex items-center gap-4">
           <a href="/" class="text-lg font-semibold">Elektrine</a>
+          <%= if @current_user do %>
+            <div class="relative inline-block text-left">
+              <details class="group">
+                <summary class="flex cursor-pointer items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 list-none">
+                  Shop
+                  <svg class="h-4 w-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div class="absolute left-0 top-full z-10 mt-1 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+                  <a href={~p"/stores"} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    My Stores
+                  </a>
+                  <a href={~p"/products"} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    My Products
+                  </a>
+                  <a href={~p"/cart"} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Shopping Cart
+                  </a>
+                  <a href={~p"/orders"} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    My Orders
+                  </a>
+                </div>
+              </details>
+            </div>
+          <% end %>
         </div>
         <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
           <%= if @current_user do %>

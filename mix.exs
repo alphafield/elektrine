@@ -62,7 +62,8 @@ defmodule Elektrine.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:guardian, "~> 2.3"},
       {:uuid, "~> 1.1"},
-      {:hammer, "~> 6.0"}
+      {:hammer, "~> 6.0"},
+      {:number, "~> 1.0.1"}
     ]
   end
 

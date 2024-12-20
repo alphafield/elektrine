@@ -1,0 +1,46 @@
+<div class="flex flex-col">
+  <div class="mx-auto w-full max-w-7xl">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-bold leading-7 text-gray-900">
+        My Stores
+      </h2>
+      <a href={~p"/stores/new"} class="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">
+        Create New Store
+      </a>
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      <%= for store <- @stores do %>
+        <div class="group relative">
+          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200">
+            <%= if store.banner do %>
+              <img src={store.banner} alt={store.name} class="h-full w-full object-cover object-center">
+            <% else %>
+              <div class="flex h-full items-center justify-center bg-gray-100">
+                <span class="text-gray-400">No banner</span>
+              </div>
+            <% end %>
+          </div>
+          <div class="mt-4">
+            <h3 class="text-lg font-semibold text-gray-900">
+              <a href={~p"/stores/#{store}"}>
+                <%= store.name %>
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-gray-500">
+              <%= store.description %>
+            </p>
+            <div class="mt-4 flex items-center gap-4">
+              <a href={~p"/stores/#{store}/edit"} class="text-sm font-semibold text-gray-900">
+                Edit Store
+              </a>
+              <a href={~p"/s/#{store.slug}"} class="text-sm font-semibold text-gray-900">
+                View Public Page
+              </a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,53 @@
+<.simple_form :let={f} for={@changeset} action={@action} class="space-y-6 max-w-2xl mx-auto">
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+
+  <div class="grid grid-cols-1 gap-6">
+    <div>
+      <.input
+        field={f[:store_id]}
+        type="select"
+        label="Store"
+        options={Enum.map(@stores, &{&1.name, &1.id})}
+        value={@changeset.data.store_id}
+        prompt="Select a store"
+        required
+      />
+    </div>
+
+    <div>
+      <.input field={f[:title]} type="text" label="Product Title" required />
+    </div>
+
+    <div>
+      <.input field={f[:description]} type="textarea" label="Description" rows={3} required />
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <.input field={f[:price]} type="number" label="Price" step="0.01" min="0" required />
+      </div>
+      <div>
+        <.input field={f[:quantity]} type="number" label="Quantity" min="0" required />
+      </div>
+    </div>
+
+    <div>
+      <.input 
+        field={f[:status]} 
+        type="select" 
+        label="Status" 
+        options={[{"Draft", "draft"}, {"Active", "active"}, {"Inactive", "inactive"}]} 
+        required 
+      />
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-3 mt-6">
+    <.link href={~p"/products"} class="text-sm font-semibold leading-6 text-zinc-900">
+      Cancel
+    </.link>
+    <.button type="submit">Save Product</.button>
+  </div>
+</.simple_form> 
